@@ -3,11 +3,11 @@ compo = {
 	cust_login_form :()=>{
 		
 		return '<h2>Login Form</h2>'
-		+'<form action="/action_page.php">'
+		+'<form>'
 		+'  <div class="imgcontainer">'
 		+'    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">'
 		+'  </div>'
-		+'  <div class="container">'
+		+'  <div class="container_1">'
 		+'    <label for="uname"><b>Username</b></label> </br>' 
 		+'    <input type="text" placeholder="Enter Username" name="uname" "required"> </br>'
 		+'    <label for="psw"><b>Password</b></label> </br>'
@@ -17,7 +17,7 @@ compo = {
 		+'      <input type="checkbox" checked="checked" name="remember"> "Remember me"'
 		+'   </label>'
 		+'  </div>'
-		+'  <div class="container" style="background-color:#f1f1f1">'
+		+'  <div class="container_2" style="background-color:#f1f1f1">'
 		+'    <button type="button" class="cancelbtn">Cancel</button>'
 		+'   <span class="psw">Forgot <a href="#">password?</a></span>'
 		+'  </div>'
@@ -26,7 +26,7 @@ compo = {
 	
 	cust_join_form : ()=>{
 		
-		return '<form action="/action_page.php" style="border:1px solid #ccc">'
+		return '<form>'
 		  	+'<div class="container">'
 		    +'<h1>Sign Up</h1>'
 		    +'<p>Please fill in this form to create an account.</p>'
@@ -52,7 +52,7 @@ compo = {
 	
 	emp_access_form :()=>{
 		return '<h2>Login Form</h2>'
-		+'<form action="/action_page.php">'
+		+'<form>'
 		+'  <div class="imgcontainer">'
 		+'    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">'
 		+'  </div>'
@@ -75,7 +75,7 @@ compo = {
 	
 	emp_register_form : ()=>{
 		
-		return '<form action="/action_page.php" style="border:1px solid #ccc">'
+		return '<form>'
 		  	+'<div class="container">'
 		    +'<h1>Sign Up</h1>'
 		    +'<p>Please fill in this form to create an account.</p>'
