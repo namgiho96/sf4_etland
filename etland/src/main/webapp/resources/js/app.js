@@ -10,9 +10,10 @@ app = (()=>{
 		$.when(
 			$.getScript($.js()+'/component/compo.js'),
 			$.getScript($.js()+'/common/auth.js'),
-			$.getScript($.js()+'/employee/emp.js')
+			$.getScript($.js()+'/employee/emp.js'),
+			$.getScript($.js()+'/customer/cust.js')
 		).done(()=>{
-			auth.permission.login();
+			auth.init();
 		});
 	};
 	return {init: init,
