@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.etland.web.mapper.cust.CustomerMapper">
+<mapper namespace="com.etland.web.cust.CustomerMapper">
   <select id="selectCustomer" resultType="com.etland.web.cust.Customer">
     SELECT CUSTOMER_ID customerID,
    					   CUSTOMER_NAME customerName,
@@ -13,8 +13,11 @@
    					   ADDRESS,
    					   POSTALCODE
 					   FROM CUSTOMERS 
-					   WHERE CUSTOMER_ID LIKE #{customerID}
-					   AND PASSWORD LIKE #{password}
+					   	WHERE CUSTOMER_ID LIKE #{customerID}
+					   	<if test="password != null">
+	  					AND PASSWORD LIKE #{password}
+	  					</if>
+					
   </select>
   
   <insert

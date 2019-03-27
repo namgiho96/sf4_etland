@@ -2,6 +2,6 @@ package com.etland.web.cmm;
 
 
 @FunctionalInterface
-public interface IFuncService {
+public interface IFunction {
 	public Object apply(Object o);
 }

@@ -14,7 +14,6 @@ public class CommonController {
 	@GetMapping("/")
 	public String home() {
 		logger.info("-----------common진입------------");
-
 		return "index";
 	}	
 }

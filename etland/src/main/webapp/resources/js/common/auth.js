@@ -15,11 +15,12 @@ auth = (()=>{
      let setContentView =()=>{
           $.getScript(compojs)
           .done(()=>{
-             
-               $(r_cnt).empty();
-               $(compo.cust_login_form())
-                   .appendTo(r_cnt);
-               login();
+        	  $(r_cnt).html(compo.cust_login_form());
+        	  $('form button[type=submit]').click(e=>{ 
+        		  e.preventDefault();
+        		  login();
+        	  }); //클릭이벤트
+        	  //왼쪽 네비게이션
               $(l_cnt+' ul.nav').empty();
               let arr=[{
                    txt : '로그인', name : 'login'
@@ -42,7 +43,10 @@ auth = (()=>{
                               $(r_cnt).empty();
                               $(compo.cust_login_form())
                               .appendTo(r_cnt);
-                              login(); 
+                              $('form button[type=submit]').click(e=>{ 
+                        		  e.preventDefault();
+                        		  login();
+                        	  }); //클릭이벤트
                               break;
                          case 'join':
                               $(r_cnt).empty();
@@ -69,7 +73,6 @@ auth = (()=>{
           });
      }; //setContenview이다.
      let login =()=>{
-          $('form button[type=submit]').click(e=>{
               let data = {
                         customerID:$('form input[name=uname]').val(),
                         password:$('form input[name=psw]').val()};
@@ -80,13 +83,20 @@ auth = (()=>{
                     data : JSON.stringify(data),
                     contentType : 'application/json',
                     success : d =>{
-                         alert('성공'+d.customerID);
+                    	if (d.customerID!=='') {
+                    		alert('성공'+d.customerID);
+                    		$(r_cnt).empty();
+                    		 $(compo.cust_mypage())
+                             .appendTo(r_cnt);
+						}else{
+							alert('로그인 실패');
+						}
                     },
                     error : e=>{
                          alert('실패');
                     }
                }); // $.ajax
-           }); //클릭이벤트
+          
      }; //login
      let join =()=>{};
      let register =()=>{};
