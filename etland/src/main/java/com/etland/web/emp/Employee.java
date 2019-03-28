@@ -8,5 +8,5 @@ import lombok.Data;
 
 @Data @Component @Lazy
 public class Employee {
-	private String employeeID,manager,name,BirthDate,photo,notes;
+	private String employeeID,manager,name,birthDate,photo,notes;
 }

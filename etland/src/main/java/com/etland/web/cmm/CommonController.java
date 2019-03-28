@@ -13,7 +13,7 @@ public class CommonController {
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
 	@GetMapping("/")
 	public String home() {
-		logger.info("-----------common진입------------");
+		logger.info("-----------1.common진입------------");
 		return "index";
 	}	
 }
