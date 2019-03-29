@@ -7,6 +7,7 @@ auth = (()=>{
           compojs = js+'/component/compo.js';
           r_cnt = '#right_content';
           l_cnt = '#left_content';
+          custjs = js+'/customer/cust.js'
           onCreate();
      };
      let onCreate =()=>{
@@ -39,6 +40,8 @@ auth = (()=>{
                     .appendTo(l_cnt+' ul.nav')
                     .click(function(){
                          let that = $(this).attr('name');
+                         $(this).addClass('active');
+                         $(this).siblings().removeClass('active');
                          switch(that){
                          case 'login':
                               $(r_cnt).empty();
@@ -93,7 +96,7 @@ auth = (()=>{
                     		$(r_cnt).empty();
                     		 $(compo.cust_mypage())
                              .appendTo(r_cnt);
-                    		 $.getScript($.js()+'/customer/cust.js')
+                    		 $.getScript(custjs)
                     		 .done(()=>{
                     			 cust.init();
                     		 })
@@ -143,7 +146,6 @@ auth = (()=>{
                	  });
 				}else{
 					alert('회원가입실패!!');
-					
 				}
              },
              error : e=>{
@@ -191,7 +193,6 @@ auth = (()=>{
              }
     	 });
      };
-     
      
      let del =()=>{
     	 

@@ -66,7 +66,7 @@ public class CustController {
 		return map;
 	}
 	
-	@PutMapping("/customers/u")
+	@PutMapping("/customers/{userid}")
 	public Map<String,Object> update(
 			@RequestBody Customer param) {
 		logger.info("----------2.update진입------------");

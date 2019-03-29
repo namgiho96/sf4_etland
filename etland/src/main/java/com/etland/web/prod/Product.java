@@ -7,10 +7,10 @@ import lombok.Data;
 
 @Data @Component @Lazy
 public class Product {
-	private String productID,
-	productName,
-	supplierID,
-	categoryID,
-	unit,
-	price;
+	private String  productID,
+					productName,
+					supplierID,
+					categoryID,
+					unit,
+					price;
 }
