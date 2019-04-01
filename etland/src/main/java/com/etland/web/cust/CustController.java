@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.etland.web.cmm.IConsumer;
 import com.etland.web.cmm.IFunction;
+import com.etland.web.cmm.ISupplier;
 import com.etland.web.cmm.PrintService;
+import com.etland.web.cmm.Proxy;
 import com.etland.web.cmm.Users;
 import com.etland.web.emp.EmployeeMapper;
 
@@ -31,7 +33,7 @@ public class CustController {
 	@Autowired EmployeeMapper empMap;
 	@Autowired Map<String,Object> map;
 	@Autowired Users<?> user;
-	
+	@Autowired Proxy pxy;
 	@PostMapping("/customers/{userid}")
 	public Customer login(
 			@PathVariable String userid,
@@ -44,14 +46,19 @@ public class CustController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("/customers/page/{page}")
 	public List<Customer> list(
-			@PathVariable String page,
-			@RequestBody Map<?, ?> param) {
-		
+			@PathVariable String page
+			) {
 		logger.info("----------2.list진입------------");
-		IFunction i = (Object o) -> custMap.selectCustomers(param);
-		List<Customer> ls = (List<Customer>) i.apply(param);
-		ps.accept(ls);
-		return ls;
+		map.clear();
+		map.put("page_num", "1");
+		map.put("page_size", "5");
+		map.put("block_Size", "5");
+		map.put("total_count", "5");
+		pxy.carryOut(map);
+		IFunction i = (Object o) -> custMap.selectCustomers(pxy);
+		List<Customer> ls = (List<Customer>) i.apply(pxy);
+		
+		return  ls;
 		
 	}
 	

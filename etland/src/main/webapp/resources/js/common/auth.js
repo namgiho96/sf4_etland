@@ -22,7 +22,6 @@ auth = (()=>{
         		  login();
         	  }); //클릭이벤트
         	  
-        	  
         	  //왼쪽 네비게이션
               $(l_cnt+' ul.nav').empty();
               let arr=[{
@@ -69,8 +68,12 @@ auth = (()=>{
                               break;
                          case 'access':
                               $(r_cnt).empty();
-                               $(compo.emp_register_form())
+                               $(compo.emp_access_form())
                               .appendTo(r_cnt);
+                               $('#access_btn').click(e=>{
+                            	   e.preventDefault();
+                            	   access();
+                               })
                               break;
                          }
                     }); //클릭
@@ -92,7 +95,6 @@ auth = (()=>{
                     contentType : 'application/json',
                     success : d =>{
                     	if (d.customerID!=='') {
-                    		alert('아이디 : '+d.customerID);
                     		$(r_cnt).empty();
                     		 $(compo.cust_mypage())
                              .appendTo(r_cnt);
@@ -103,7 +105,6 @@ auth = (()=>{
                     		 .fail(()=>{
                     			 	alert('component/compo.js 를 찾지  못했습니다.');
                     		 });
-                    		 
                     		 $('div button[type=submit]').click(e=>{ 
                           		  e.preventDefault();
                           		  login();
@@ -153,47 +154,10 @@ auth = (()=>{
                   $(r_cnt).empty();
  				 $(compo.cust_login_form())
                   .appendTo(r_cnt);
- 				login();
+ 				 login();
              }
     	 });
      };
-     let update =()=>{
-    	 let data = {
-    			 customerID : $('form input[name=cid]').val(),
-    			 customerName : $('form input[name=cname]').val(),
-    			 password : $('form input[name=cpass]').val(),
-    			 ssn : $('form input[name=cssn]').val(),
-    			 phone : $('form input[name=cphone]').val(),
-    			 city : $('form input[name=ccity]').val(),
-    			 address : $('form input[name=cadr]').val(),
-    			 postalCode : $('form input[name=cptc]').val()
-    	 }; 
-    	 $.ajax({
-    		 url : _+'/customers/u/',
-    		 type : 'PUT',
-    		 dataType : 'json',
-    		 data : JSON.stringify(data),
-    		 contentType : 'application/json',
-    		 success : d =>{
-    			 if (d.msg==='SUCCESS') {
-    				 alert('수정 완료헸습니다');
-    				 $(r_cnt).empty();
-    				 $(compo.cust_login_form())
-                     .appendTo(r_cnt);
-    				 $('form button[type=submit]').click(e=>{ 
-               		  e.preventDefault();
-               		  login();
-               	  });
-				}else{
-					alert('수정실패!!');
-				}
-             },
-             error : e=>{
-                  alert('실패');
-             }
-    	 });
-     };
-     
      let del =()=>{
     	 
     	 $.ajax({
@@ -220,7 +184,7 @@ auth = (()=>{
                   alert('실패');
              }
     	 });
-     };
+     }; //del
      
      let register =()=>{
     	  let data = {
@@ -259,40 +223,29 @@ auth = (()=>{
      				login();
                  }
         	 }); // $.ajax
-    	 
-    	 
-    	 
-     };
+     };//register
      let access =()=>{
-    	 
-	    let data = {
-	    		employeeID:$('form input[name=employeeID]').val(),
-	    		name:$('form input[name=name]').val()};
-           $.ajax({
-                url : _+'/users/cust/'+data.customerID,
-                type : 'POST',
-                dataType : 'json',
-                data : JSON.stringify(data),
-                contentType : 'application/json',
-                success : d =>{
-                	if (d.customerID!=='') {
-                		alert('아이디 : '+d.customerID);
-                		$(r_cnt).empty();
-                		 $(compo.cust_mypage())
-                         .appendTo(r_cnt);
-                		 $('div button[type=submit]').click(e=>{ 
-                      		  e.preventDefault();
-                      		  login();
-                      	  });
-                		 
-					}else{
-						alert('로그인 실패');
-					}
-                },
-                error : e=>{
-                     alert('실패');
-                }
-           }); // $.ajax
-     };
+    	 let ok = confirm('사원 입니까?');
+    	 if(ok){
+    		 let emp_no = prompt('사원번호를 입력하세요');
+    		 $.getJSON($.ctx()+'/employees',d=>{
+        		 if(emp_no === d.employeeID){
+        		 $('form #emp_container').append('<input type="name" id="name" name="name" value="김경민" />');
+        		 if($('#name').val() === d.name){
+        			 //고객명단이 보여라
+        			 $.getScript(custjs,()=>{
+        				 cust.list();
+        			 });
+        		 }else{
+        		 }
+        	 }else{
+        		 alert('사원번호가 일치하지 않습니다');
+        	 } 
+			 });
+    	
+    	}else{
+    		alert('사원 전용 페이지입니다'); 
+    	}
+     }; //access 
      return {init:init};
 })();

@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.etland.web.cmm.IConsumer;
 import com.etland.web.cmm.IFunction;
+import com.etland.web.cmm.ISupplier;
 import com.etland.web.cmm.PrintService;
 import com.etland.web.cmm.Users;
 import com.etland.web.cust.CustController;
 
 @RestController
 public class EmployeeController {
-private static final Logger logger = LoggerFactory.getLogger(CustController.class);
+private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	
 	@Autowired Employee emp;
 	@Autowired PrintService ps;
@@ -31,13 +31,11 @@ private static final Logger logger = LoggerFactory.getLogger(CustController.clas
 	@Autowired Map<String,Object> map;
 	@Autowired Users<?> user;
 	
-	@PostMapping("/employees/{userid}")
-	public Employee login(
-			@PathVariable String userid,
-			@RequestBody Employee param) {
-		logger.info("----------2.login진입------------");
-		IFunction i = (Object o) ->  empMap.selectEmployee(param);
-		return  (Employee) i.apply(param);
+	@GetMapping("/employees")
+	public Employee login() {
+		logger.info("----------2.emp----login진입------------");
+		ISupplier i =  ()->  empMap.findOneEmployee();
+		return  (Employee) i.get();
 	}
 	
 	@SuppressWarnings("unchecked")

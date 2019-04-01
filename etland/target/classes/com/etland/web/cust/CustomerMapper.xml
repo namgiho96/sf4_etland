@@ -19,6 +19,20 @@
 	  					</if>
 					
   </select>
+
+   <select id="selectCustomers" resultType="com.etland.web.cust.Customer"
+   parameterType="com.etland.web.cmm.Proxy">
+                SELECT CUSTOMER_ID customerID ,
+  					   CUSTOMER_NAME customerName,
+  					   PASSWORD password,
+  					   SSN ,
+  					   PHONE,
+  					   CITY,
+  					   ADDRESS,
+  					   POSTALCODE
+				  	 FROM CUSTOMERS 
+  </select>
+  
   
   <insert
   id="insertCustomer"

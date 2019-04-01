@@ -16,7 +16,7 @@ prod =(()=>{
 		};
 		let setContentView=()=>{
 			$.when(
-					$.getScript(compojs)
+				$.getScript(compojs)
 			).done(()=>{
 				carousel();
 				
@@ -41,7 +41,7 @@ prod =(()=>{
 		
 		let carousel =()=>{
 			$(r_cnt).html(compo.cust_carousel());
-			$(r_cnt).after(compo.prod_post());
+			$('div #myCarousel').after(compo.prod_post());
 		};
 		
 		return {init:init}
