@@ -8,6 +8,7 @@ emp =(()=>{
 		    compojs = js+'/component/compo.js';
 		    r_cnt = '#right_content';
 		    l_cnt = '#left_content';
+		    custjs = js+'/customer/cust.js';
 		    
 		
 	};
@@ -53,10 +54,14 @@ emp =(()=>{
                  $(this).siblings().removeClass('active');
                  switch(that){
                  case 'custlist':
-                	 $(r_cnt).html(compo.cust_list);
+                	 $(r_cnt).empty();
+                	 $.getScript(custjs);
+                	 cust.list();
                 	 
                      break;
                  case 'custjoin':
+                	 $(r_cnt).empty();
+                	 $(r_cnt).html(compo.prod_post());
                 	 
                       break;
                  case 'prodlist':

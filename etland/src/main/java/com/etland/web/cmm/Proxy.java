@@ -29,7 +29,7 @@ public class Proxy {
         blockSize = ((String) paramMap.get("block_Size") == null) ? 5 : Integer.parseInt(_blockSize);
 
         totalCount = Integer.parseInt((String) paramMap.get("total_count"));
-
+        System.out.println("총카운트 : "+totalCount);
         int nmg = totalCount % pageSize;
         int pageCount = (nmg == 0) ? totalCount / pageSize : totalCount / pageSize + 1;
 
@@ -42,7 +42,7 @@ public class Proxy {
         System.out.println("END로우:" + endRow);
 
         int blocknum = (pageNum - 1) / blockSize;
-        endpage = startpage + (blockSize - 1);
+        endpage = startpage + (blockSize - 1) +1;
 
         if (existPrev) {
             startpage = blocknum * blockSize + 1;
@@ -51,7 +51,7 @@ public class Proxy {
         }
         
         if(endpage>pageCount) {
-            endpage = pageCount;
+            endpage = pageCount+1;
        }
 
         existPrev = (startpage - pageSize) > 0;
@@ -59,8 +59,8 @@ public class Proxy {
         prevBlock = startpage - pageSize;
         nextBlock = startpage + pageSize;
 
-        System.out.println("프리브블록: " + prevBlock);
-        System.out.println("넥스트블록: " + nextBlock);
+        System.out.println("startpage: " + startpage);
+        System.out.println("endpage: " + endpage);
     }
 
 }
