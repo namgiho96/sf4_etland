@@ -35,7 +35,7 @@ public class Proxy {
 
         System.out.println("총페이지 수:" + pageCount);
 
-        startRow = (pageNum - 1) * pageSize + 1;
+        startRow = (pageNum - 1) * pageSize;
         System.out.println("스타트 로우:" + startRow);
 
         endRow = (totalCount > pageNum * pageSize) ? pageNum * pageSize : totalCount;

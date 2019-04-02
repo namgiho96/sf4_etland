@@ -22,6 +22,7 @@ cust =(()=>{
 		mypage();
 	};
 	let mypage=()=>{
+		
 		$.getScript(compojs);
 		$(r_cnt).html(compo.cust_mypage());
 		$(l_cnt+' ul').empty();
@@ -34,7 +35,6 @@ cust =(()=>{
               {txt : '장바구니', name : 'basket'
          }];
 		$.each(arr,(i,j)=>{
-			
 			 $('<li><a  href="#">'+j.txt+'</a></li>')
 			  .attr('name', j.name)
               .appendTo(l_cnt+' ul.nav')
@@ -117,6 +117,7 @@ cust =(()=>{
     		$(compo.cust_list()).appendTo(r_cnt);
     		$.each(d,(i,j)=>{
     			$('#cust_tab').append('<tr>'
+    					+'<td>'+j.no+'</td>'
                         +'<td>'+j.customerID+'</td>'
                         +'<td>'+j.customerName+'</td>'
                         +'<td>'+j.ssn+'</td>'
@@ -129,6 +130,8 @@ cust =(()=>{
     		});
     	});
     };
+    
+    
 	return {init:init,
 			list:list}
 })();

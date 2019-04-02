@@ -1,4 +1,5 @@
 var auth = auth || {};
+
 auth = (()=>{
      let _,js,compojs,r_cnt,l_cnt;
      let init =()=>{
@@ -14,6 +15,7 @@ auth = (()=>{
           setContentView();
      };
      let setContentView =()=>{
+    	 
           $.getScript(compojs)
           .done(()=>{
         	  $(r_cnt).html(compo.cust_login_form());
@@ -21,19 +23,9 @@ auth = (()=>{
         		  e.preventDefault();
         		  login();
         	  }); //클릭이벤트
-        	  
         	  //왼쪽 네비게이션
               $(l_cnt+' ul.nav').empty();
-              let arr=[{
-                   txt : '로그인', name : 'login'
-              },{
-                   txt : '회원가입', name : 'join'
-              },{
-                   txt : '사원등록', name : 'register'
-              },{
-                   txt : '사원접속', name : 'access'
-              }];
-              $.each(arr,(i,j)=>{
+              $.each(nav(),(i,j)=>{
                     $('<li><a  href="#">'+j.txt+'</a></li>')
                     .attr('name', j.name)
                     .appendTo(l_cnt+' ul.nav')
@@ -71,8 +63,11 @@ auth = (()=>{
                                $(compo.emp_access_form())
                               .appendTo(r_cnt);
                                $('#access_btn').click(e=>{
-                            	   e.preventDefault();
                             	   access();
+                            	   e.preventDefault();
+                            	   $.getScript(js+'/employee/emp.js',()=>{
+                            		   emp.nav();
+                            	   })
                                })
                               break;
                          }
@@ -83,6 +78,18 @@ auth = (()=>{
               alert('component/compo.js 를 찾지  못했습니다.');
           });
      }; //setContenview이다.
+     
+     let nav =()=>{
+    	 return [{
+             txt : '로그인', name : 'login'
+         },{
+              txt : '회원가입', name : 'join'
+         },{
+              txt : '사원등록', name : 'register'
+         },{
+              txt : '사원접속', name : 'access'
+         }];
+     };
      let login =()=>{
               let data = {
                         customerID:$('form input[name=uname]').val(),
