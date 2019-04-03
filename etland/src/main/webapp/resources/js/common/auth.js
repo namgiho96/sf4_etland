@@ -241,7 +241,7 @@ auth = (()=>{
         		 if($('#name').val() === d.name){
         			 //고객명단이 보여라
         			 $.getScript(custjs,()=>{
-        				 cust.list();
+        				 cust.ls(1);
         			 });
         		 }else{
         		 }

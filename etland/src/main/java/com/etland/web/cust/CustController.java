@@ -50,10 +50,11 @@ public class CustController {
 			) {
 		logger.info("----------2.list진입------------");
 		map.clear();
-		map.put("page_num", "1");
+		map.put("page_num", page);
 		map.put("page_size", "5");
 		map.put("block_Size", "5");
-		map.put("total_count", "36");
+		ISupplier s = () -> custMap.countAllCustomer();
+		map.put("total_count",s.get());
 		pxy.carryOut(map);
 		IFunction i = (Object o) -> custMap.selectCustomers(pxy);
 		List<?> ls = (List<?>) i.apply(pxy);

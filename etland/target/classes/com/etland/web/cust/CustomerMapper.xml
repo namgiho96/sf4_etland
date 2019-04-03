@@ -43,6 +43,12 @@
 					ORDER BY no DESC
 					LIMIT #{startRow},#{pageSize}
   </select>
+  
+  <select id="countAllCustomer" resultType="int">
+           SELECT COUNT(*)
+				FROM CUSTOMERS
+  </select>
+  
   <insert
   id="insertCustomer"
   parameterType="com.etland.web.cust.Customer"

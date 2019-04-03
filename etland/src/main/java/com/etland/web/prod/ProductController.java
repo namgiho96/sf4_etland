@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.etland.web.cmm.IConsumer;
 import com.etland.web.cmm.IFunction;
+import com.etland.web.cmm.ISupplier;
 import com.etland.web.cmm.PrintService;
+import com.etland.web.cmm.Proxy;
 import com.etland.web.cmm.Users;
 import com.etland.web.cust.CustController;
 
@@ -30,7 +32,7 @@ private static final Logger logger = LoggerFactory.getLogger(CustController.clas
 	@Autowired ProductMapper prodMap;
 	@Autowired Map<String,Object> map;
 	@Autowired Users<?> user;
-	
+	@Autowired Proxy pxy;
 	@PostMapping("/phones/{userid}")
 	public Product login(
 			@PathVariable String userid,
@@ -40,17 +42,27 @@ private static final Logger logger = LoggerFactory.getLogger(CustController.clas
 		return  (Product) i.apply(param);
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	@GetMapping("/phones/page/{page}")
-	public List<Product> list(
-			@PathVariable String page,
-			@RequestBody Map<?, ?> param) {
+	public Map<?,?> list(
+			@PathVariable String page
+			) {
+		logger.info("----------2.pord_list진입------------");
+		map.clear();
+		map.put("page_num", page);
+		map.put("page_size", "5");
+		map.put("block_Size", "5");
+		ISupplier s =() -> prodMap.countAllproduct();
+		map.put("total_count",s.get());
+		pxy.carryOut(map);
+		IFunction i = (Object o) -> prodMap.selectproducts(pxy);
+		List<?> ls = (List<?>) i.apply(pxy);
+		map.clear();
+		map.put("ls",ls);
+		map.put("pxy",pxy);
 		
-		logger.info("----------2.list진입------------");
-		IFunction i = (Object o) -> prodMap.selectproducts(param);
-		List<Product> ls = (List<Product>) i.apply(param);
-		ps.accept(ls);
-		return ls;
+		
+		return map;
 		
 	}
 	

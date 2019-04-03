@@ -2,6 +2,8 @@ package com.etland.web.prod;
 import java.util.List;
 import java.util.Map;
 
+import com.etland.web.cmm.Proxy;
+
 public interface ProductMapper {
 	
 	
@@ -9,13 +11,15 @@ public interface ProductMapper {
 
 	public List<Product> selectproductList(Map<?,?> map);
 
-	public List<Product> selectproducts(Map<?,?> map);
+	public List<?> selectproducts(Proxy pxy);
 
 	public Product selectproduct(Product prod);
 	
 	public Product retriveproduct(Product prod);
 
 	public int countproduct(Map<?,?> map);
+	
+	public int countAllproduct();
 
 	public boolean existsproductID(Product prod);
 

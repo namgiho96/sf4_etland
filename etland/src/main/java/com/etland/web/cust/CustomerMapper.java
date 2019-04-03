@@ -20,6 +20,8 @@ public interface CustomerMapper {
 	public Customer retriveCustomer(Customer cust);
 
 	public int countCustomer(Map<?,?> map);
+	
+	public int countAllCustomer();
 
 	public void updateCustomer(Customer cust);
 
