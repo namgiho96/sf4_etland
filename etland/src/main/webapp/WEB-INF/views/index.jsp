@@ -54,10 +54,10 @@
 	        <li><a href="#section3">Family</a></li>
 	        <li><a href="#section3">Photos</a></li>
 	      </ul><br>
-	      <div class="input-group">
-	        <input type="text" class="form-control" placeholder="Search Blog..">
+	      <div id="srch_grp" class="input-group">
+	        <input id="srch" type="text" class="form-control" placeholder="상품 검색">
 	        <span class="input-group-btn">
-	          <button class="btn btn-default" type="button">
+	          <button id="srch_btn" class="btn btn-default" type="button">
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 	        </span>
@@ -137,6 +137,8 @@
 <script src="<%=application.getContextPath()%>/resources/js/employee/emp.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/common/auth.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/prod/prod.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/common/util.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/prod/fileupload.js"></script>
 <script>
 app.init('<%=application.getContextPath()%>');
 </script>

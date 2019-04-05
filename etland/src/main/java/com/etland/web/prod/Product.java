@@ -1,5 +1,7 @@
 package com.etland.web.prod;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -12,5 +14,7 @@ public class Product {
 					supplierID,
 					categoryID,
 					unit,
+					color,
 					price;
+	private List<String> freebies;
 }

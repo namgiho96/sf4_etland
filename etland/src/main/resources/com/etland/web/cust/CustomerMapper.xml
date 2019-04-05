@@ -33,7 +33,6 @@
 					   	<if test="password != null">
 	  					AND PASSWORD LIKE #{password}
 	  					</if>
-					
   </select>
    <select id="selectCustomers" resultMap="result"
    parameterType="com.etland.web.cmm.Proxy">

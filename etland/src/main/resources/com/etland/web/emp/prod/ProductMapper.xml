@@ -13,6 +13,27 @@
   <result property="price" column="PRICE"/>
 </resultMap>
 
+ <insert
+  id="insertproduct"
+  parameterType="com.etland.web.prod.Product"
+  flushCache="true"
+  statementType="PREPARED"
+  timeout="20">
+  		     INSERT INTO PRODUCTS (PRODUCT_ID,
+        					   PRODUCT_NAME,
+        					   SUPPLIER_ID,
+        					   CATEGORY_ID,
+        					   UNIT,
+        					   PRICE
+        					   ) VALUES(
+           						 #{productID},
+           						 #{productName},
+           						 #{supplierID},
+           						 #{categoryID},
+           						 #{unit},
+           						 #{price})
+</insert>
+
 <select id="selectproducts" resultMap="result"
    parameterType="com.etland.web.cmm.Proxy">
  		SELECT  @ROWNUM:=@ROWNUM+1 AS no,
@@ -20,10 +41,36 @@
 				FROM PRODUCTS P,(SELECT @ROWNUM:=0) PRO
 				ORDER BY no DESC
 				LIMIT #{startRow},#{pageSize};
-  </select>
+</select>
   
-   <select id="countAllproduct" resultType="int">
+<select id="countAllproduct" resultType="int">
            SELECT COUNT(*)
 				FROM PRODUCTS
-  </select>
+</select>
+
+
+<select id="countsearc" resultType="int" parameterType="string">
+  SELECT count(*)
+	FROM PRODUCTS P JOIN SUPPLIERS S ON P.SUPPLIER_ID LIKE S.SUPPLIER_ID
+					 		JOIN CATEGORIES C ON P.CATEGORY_ID LIKE C.CATEGORY_ID
+							WHERE P.PRODUCT_NAME LIKE #{searchWord} 
+							OR SUPPLIER_NAME LIKE #{searchWord} 
+							OR ADDRESS LIKE #{searchWord} 
+							OR CATEGORY_NAME LIKE #{searchWord}
+</select>
+<select id="txproducts"  resultType="com.etland.web.prod.Product" parameterType="com.etland.web.cmm.Proxy">
+   	SELECT R.*
+		FROM (SELECT DISTINCT @rownum:=@rownum+1 as no,
+					P.PRODUCT_ID productID,
+					P.PRODUCT_NAME productName,
+					S.SUPPLIER_NAME supplierID,
+					C.CATEGORY_NAME categoryID,
+					P.UNIT,
+					P.PRICE
+					FROM PRODUCTS P JOIN SUPPLIERS S ON P.SUPPLIER_ID LIKE S.SUPPLIER_ID
+					 	JOIN CATEGORIES C ON P.CATEGORY_ID LIKE C.CATEGORY_ID,(SELECT @rownum:=0) AS a
+							WHERE P.PRODUCT_NAME LIKE #{searchWord} OR SUPPLIER_NAME LIKE #{searchWord} OR ADDRESS LIKE #{searchWord} OR CATEGORY_NAME LIKE #{searchWord})R
+						ORDER BY no DESC
+						LIMIT #{startRow}, #{pageSize}	
+ </select>
 </mapper>

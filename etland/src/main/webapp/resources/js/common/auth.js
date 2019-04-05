@@ -77,8 +77,10 @@ auth = (()=>{
           .fail(()=>{
               alert('component/compo.js 를 찾지  못했습니다.');
           });
+          
+          
      }; //setContenview이다.
-     
+      $('#srch_grp').hide();
      let nav =()=>{
     	 return [{
              txt : '로그인', name : 'login'

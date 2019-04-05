@@ -12,6 +12,12 @@ public interface ProductMapper {
 	public List<Product> selectproductList(Map<?,?> map);
 
 	public List<?> selectproducts(Proxy pxy);
+	
+	public List<?> searchproducts(Proxy pxy);
+	
+	public List<Product> txproducts(Proxy pxy);
+	
+	public List<Product> txproduct(Proxy pxy);
 
 	public Product selectproduct(Product prod);
 	
@@ -20,6 +26,8 @@ public interface ProductMapper {
 	public int countproduct(Map<?,?> map);
 	
 	public int countAllproduct();
+	
+	public int countsearc(String a);
 
 	public boolean existsproductID(Product prod);
 

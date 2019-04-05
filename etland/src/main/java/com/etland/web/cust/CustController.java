@@ -61,10 +61,14 @@ public class CustController {
 		map.clear();
 		map.put("ls",ls);
 		map.put("pxy",pxy);
-		
 		return  map;
-		
 	}
+	
+	
+	
+	
+	
+	
 	
 	@PostMapping("/customers")
 	public Map<String,Object> join(

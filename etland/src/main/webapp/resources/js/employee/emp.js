@@ -9,28 +9,23 @@ emp =(()=>{
 		    r_cnt = '#right_content';
 		    l_cnt = '#left_content';
 		    custjs = js+'/customer/cust.js';
-		    
-		
 	};
 	 let init =()=>{
 		 setpath();
 		onCreate();
 	};
 	let onCreate=()=>{
-		
+	
 		setContentView();
 	};
 	let setContentView=()=>{
 		$.When(
-				
 				$.getScript(compojs)
 				).done(()=>{
-					
 					
 				}).fail(()=>{
 					 alert('emp/emp.js 를 찾지  못했습니다.');
 				});
-		
 	};
 	
 	let nav=()=>{
@@ -58,9 +53,9 @@ emp =(()=>{
                 	 $(r_cnt).html(cust.ls(1));
                      break;
                  case 'custjoin':
-                	 $(r_cnt).empty();
                 	 $(r_cnt).html(compo.prod_post());
-                	 
+                	 $.getScript(js+'/prod/prod.js');
+                	 prod.post();
                       break;
                  case 'prodlist':
                 	 $(r_cnt).html(prodls(1));
@@ -77,8 +72,9 @@ emp =(()=>{
             });
 		});
 		$('ul li[name=custlist]').addClass('active');
-	}
+		
 	
+	}
 	let prodls =x=>{
 		setpath();
 		$.getJSON($.ctx()+'/phones/page/'+x,d=>{
@@ -159,7 +155,12 @@ emp =(()=>{
 					});
 				}
 		});
-		
+		let srch =()=>{
+			
+			
+			
+			
+		};
 		
 		
 		
